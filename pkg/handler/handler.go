@@ -16,10 +16,29 @@ func (h *Handler) InitRouts() *echo.Echo {
 	}
 	api := router.Group("/api")
 	{
-		api.GET("/home", nil)
-		api.GET("/selection", nil)
-		api.GET("/forDoctors", nil)
-		api.GET("/search", nil)
+		//ОБЩИЕ ОБРАБОТЧИКИ
+		api.DELETE("/home/profile", h.deleteProfile)
+		api.GET("/articles", h.readPost)
+		api.GET("/:id", h.checkProfile)
+		api.POST("/discussions", h.createComment)
+		api.PUT("/discussions", h.editComment)
+		api.DELETE("/discussions", h.deleteComment)
+
+		//ВРАЧА ОБРАБОТЧИКИ
+		api.POST("/!!!", h.acceptPatient)
+		api.DELETE("/!!!", h.unAcceptPatient)
+		api.POST("/!!!", h.ratePatient)
+		api.POST("/posts", h.createPost)
+		api.PUT("/posts", h.editPost)
+		api.DELETE("/posts", h.deletePost)
+
+		//ПАЦИЕНТА ОБРАБОТЧИКИ
+		api.POST("/!!!", h.createRequest)
+		api.DELETE("/!!!", h.deleteRequest)
+		api.POST("/!!!", h.rateDoctor)
+		api.POST("/discussions", h.createDiscussion)
+		api.PUT("/discussions", h.editDiscussion)
+		api.DELETE("/discussions", h.deleteDiscussion)
 	}
 	return router
 }
